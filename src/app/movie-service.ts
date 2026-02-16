@@ -10,8 +10,8 @@ export class MovieService {
   private readonly http: HttpClient = inject(HttpClient);
 
   // Movies currently in playing in theatres
-  public getNowPlayingMovies(): Observable<any> {
-    return this.http.get('https://api.themoviedb.org/3/movie/now_playing', {
+  public getNowPlayingMovies(page: number): Observable<any> {
+    return this.http.get(`https://api.themoviedb.org/3/movie/now_playing?page=${page}`, {
       headers: {
         Authorization: environment.tmdbToken,
       },
@@ -19,8 +19,8 @@ export class MovieService {
   }
 
   // Movies ordered by popularity
-  public getPopularMovies(): Observable<any> {
-    return this.http.get('https://api.themoviedb.org/3/movie/popular', {
+  public getPopularMovies(page: number): Observable<any> {
+    return this.http.get(`https://api.themoviedb.org/3/movie/popular?page=${page}`, {
       headers: {
         Authorization: environment.tmdbToken,
       },
@@ -28,8 +28,8 @@ export class MovieService {
   }
 
   // Movies ordered by rating
-  public getTopRatedMovies(): Observable<any> {
-    return this.http.get('https://api.themoviedb.org/3/movie/top_rated', {
+  public getTopRatedMovies(page: number): Observable<any> {
+    return this.http.get(`https://api.themoviedb.org/3/movie/top_rated?page=${page}`, {
       headers: {
         Authorization: environment.tmdbToken,
       },
@@ -37,8 +37,8 @@ export class MovieService {
   }
 
   // Upcoming movies
-  public getUpcoming(): Observable<any> {
-    return this.http.get('https://api.themoviedb.org/3/movie/upcoming', {
+  public getUpcoming(page: number): Observable<any> {
+    return this.http.get(`https://api.themoviedb.org/3/movie/upcoming?page=${page}`, {
       headers: {
         Authorization: environment.tmdbToken,
       },
