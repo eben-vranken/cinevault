@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, effect, inject, signal, ViewChild } from '@angular/core';
 import { MovieService } from '../../app/movie-service';
 import { ActivatedRoute } from '@angular/router';
 import { MovieList } from '../movielist/movielist';
@@ -16,6 +16,16 @@ export class MovieShell {
   @ViewChild('sentinel') sentinelEl!: ElementRef;
 
   selectedMovie = signal<any | null>(null);
+
+  constructor() {
+    effect(() => {
+      if (this.selectedMovie()) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+    });
+  }
 
   openModal(id: number) {
     this.movieService.getMovieDetails(id).subscribe({
