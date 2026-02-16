@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { MovieShell } from '../components/movielist/movieshell';
+import { MovieShell } from '../components/movieshell/movieshell';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'popular', pathMatch: 'full' },

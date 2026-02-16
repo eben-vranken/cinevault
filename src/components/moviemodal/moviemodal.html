@@ -1,0 +1,87 @@
+<section class="fixed inset-0 z-20 flex items-center justify-center">
+    <div class="absolute inset-0 bg-black/55 backdrop-blur-sm cursor-pointer" (click)="close.emit()"></div>
+
+    <section
+        class="relative z-10 bg-black rounded-lg lg:w-3/4 w-11/12 drop-shadow-lg overflow-hidden max-h-[90vh] overflow-y-auto flex flex-col">
+        <button (click)="close.emit()"
+            class="absolute cursor-pointer top-4 right-4 z-20 text-white hover:text-gray-300 transition text-2xl leading-none">✕</button>
+        <section class="relative">
+            <img src="https://image.tmdb.org/t/p/w1280/{{ moviePosterURL }}" alt="Movie Poster"
+                class="h-auto rounded-md mb-4" />
+            <div class="absolute bottom-0 left-0 right-0 h-128 bg-linear-to-b from-transparent to-black rounded-md">
+            </div>
+        </section>
+
+        <section class="p-6 flex flex-col gap-y-2">
+            <!-- Desktop & Tablet -->
+            <section class="md:flex justify-between items-center md:visible hidden">
+                <section class="flex items-center gap-x-2 ">
+                    <h1 class="text-2xl font-semibold">{{ movieName }}</h1>
+                    <span class="opacity-50 font-bold">—</span>
+                    <span class="text-lg text-yellow-400 font-bold">⭐ {{ movieRating }}</span>
+                </section>
+
+                <span class="font-bold opacity-50">{{ movieRuntime }} min</span>
+            </section>
+
+            <!-- Mobile -->
+            <section class="flex flex-col md:hidden">
+                <h1 class="text-2xl font-semibold">{{ movieName }}</h1>
+
+                <section class="flex items-center gap-x-2">
+                    <span class="text-lg text-yellow-400 font-bold">⭐ {{ movieRating }}</span>
+                    <span class="opacity-50 font-bold">—</span>
+                    <span class="font-bold opacity-50">{{ movieRuntime }} min</span>
+                </section>
+            </section>
+
+            <span class="font-light text-sm text-white/50">{{movieTagline.toUpperCase()}}</span>
+
+            <p class="opacity-100">{{ movieDescription }}</p>
+
+            <section class="flex flex-wrap gap-x-2 gap-y-2 mt-4">
+                @for (genre of movieGenres; track genre.id) {
+                <div class="text-sm px-3 py-1 bg-gray-800 rounded-full">
+                    {{ genre.name }}
+                </div>
+                }
+            </section>
+
+            <hr
+                class="h-px border-t-0 my-2 bg-transparent bg-linear-to-r from-transparent via-white/25 to-transparent opacity-100" />
+
+            <!-- Boring Specs -->
+            <section class="flex justify-between px-3 md:flex-row flex-col">
+                <!-- First column -->
+                <ul>
+                    <li class="flex gap-x-1">
+                        <span class="font-semibold">Released in:</span>
+                        <span class="opacity-50">{{ movieReleaseDate }}</span>
+                    </li>
+
+                    <li class="flex gap-x-1">
+                        <span class="font-semibold">Budget:</span>
+                        <span class="opacity-50">${{ movieBudget.toLocaleString() }}</span>
+                    </li>
+
+                    <li class="flex gap-x-1">
+                        <span class="font-semibold">Revenue:</span>
+                        <span class="opacity-50">${{ movieRevenue.toLocaleString() }}</span>
+                    </li>
+                </ul>
+
+                <!-- Production Houses -->
+                <ul>
+                    <span class="font-semibold">Production Companies:</span>
+                    @for(company of movieProductionHouses; track company.id) {
+                    <li class="flex gap-x-1">
+                        <span class="opacity-50">{{ company.name }}</span>
+                    </li>
+                    }
+                </ul>
+
+                <span></span>
+            </section>
+        </section>
+    </section>
+</section>

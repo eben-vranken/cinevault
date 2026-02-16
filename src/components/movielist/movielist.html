@@ -1,7 +1,7 @@
 <section class="grid gap-1.5 grid-cols-[repeat(auto-fill,minmax(min(100%,200px),1fr))]">
     @for(movie of movies(); track movie.id) {
-    <movieposter [movieName]="movie.title" [moviePosterURL]="movie.poster_path" [movieRating]="movie.vote_average">
+    <movieposter [id]="movie.id" [movieName]="movie.title" [moviePosterURL]="movie.poster_path"
+        [movieRating]="movie.vote_average" (movieClicked)="movieClicked.emit($event)">
     </movieposter>
     }
-
 </section>

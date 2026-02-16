@@ -44,4 +44,13 @@ export class MovieService {
       },
     });
   }
+
+  // Specific movie details
+  public getMovieDetails(movieId: number): Observable<any> {
+    return this.http.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+      headers: {
+        Authorization: environment.tmdbToken,
+      },
+    });
+  }
 }

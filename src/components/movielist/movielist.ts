@@ -1,11 +1,12 @@
-import { Component, input } from "@angular/core";
-import { MoviePoster } from "../movieposter/movieposter";
+import { Component, EventEmitter, input, Output } from '@angular/core';
+import { MoviePoster } from '../movieposter/movieposter';
 
 @Component({
-    selector: 'movielist',
-    templateUrl: './movielist.html',
-    imports: [MoviePoster]
+  selector: 'movielist',
+  templateUrl: './movielist.html',
+  imports: [MoviePoster],
 })
 export class MovieList {
-    movies = input.required<any[]>();
+  movies = input.required<any[]>();
+  @Output() movieClicked = new EventEmitter<number>();
 }

@@ -1,18 +1,28 @@
 import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { MovieService } from '../../app/movie-service';
 import { ActivatedRoute } from '@angular/router';
-import { MovieList } from './movielist';
+import { MovieList } from '../movielist/movielist';
+import { MovieModal } from '../moviemodal/moviemodal';
 
 @Component({
   selector: 'movieshell',
   templateUrl: './movieshell.html',
-  imports: [MovieList],
+  imports: [MovieList, MovieModal],
 })
 export class MovieShell {
   private readonly movieService = inject(MovieService);
   private readonly route = inject(ActivatedRoute);
 
   @ViewChild('sentinel') sentinelEl!: ElementRef;
+
+  selectedMovie = signal<any | null>(null);
+
+  openModal(id: number) {
+    this.movieService.getMovieDetails(id).subscribe({
+      next: (movie) => this.selectedMovie.set(movie),
+      error: (err) => console.error('Failed to load movie details', err),
+    });
+  }
 
   movies = signal<any[]>([]);
   currentPage = 1;
@@ -32,8 +42,6 @@ export class MovieShell {
     if (this.sentinelEl) {
       observer.observe(this.sentinelEl.nativeElement);
     }
-
-    // 2. Handle Route Changes
     this.route.data.subscribe((data) => {
       this.currentType = data['type'];
       this.currentPage = 1;
@@ -48,11 +56,9 @@ export class MovieShell {
   }
 
   private checkAndLoadIfNeeded() {
-    // Defer check to next tick to allow DOM to update
     setTimeout(() => {
       if (this.sentinelEl && !this.isLoading) {
         const rect = this.sentinelEl.nativeElement.getBoundingClientRect();
-        // If sentinel is visible in viewport, load next page
         if (rect.top < window.innerHeight && rect.bottom > 0) {
           this.loadNextPage();
         }
@@ -83,10 +89,13 @@ export class MovieShell {
 
     request$?.subscribe({
       next: (response) => {
-        this.movies.update((currentMovies) => [...currentMovies, ...response.results]);
+        this.movies.update((currentMovies) => {
+          const existingIds = new Set(currentMovies.map((m) => m.id));
+          const newMovies = response.results.filter((m: any) => !existingIds.has(m.id));
+          return [...currentMovies, ...newMovies];
+        });
         this.isLoading = false;
 
-        // Check if sentinel is still visible after loading, and load more if needed
         this.checkAndLoadIfNeeded();
       },
       error: (err) => {

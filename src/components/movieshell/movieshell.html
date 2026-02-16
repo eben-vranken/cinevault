@@ -1,0 +1,14 @@
+<movielist [movies]="movies()" (movieClicked)="openModal($event)" />
+
+@if (selectedMovie()) {
+<moviemodal [movieName]="selectedMovie().title" [movieDescription]="selectedMovie().overview"
+    [moviePosterURL]="selectedMovie().backdrop_path" [movieRating]="selectedMovie().vote_average"
+    [movieGenres]="selectedMovie().genres" [movieReleaseDate]="selectedMovie().release_date"
+    [movieRuntime]="selectedMovie().runtime" [movieLanguage]="selectedMovie().original_language"
+    [movieBudget]="selectedMovie().budget" [movieTagline]="selectedMovie().tagline"
+    [movieRevenue]="selectedMovie().revenue" [movieProductionHouses]="selectedMovie().production_companies"
+    (close)="selectedMovie.set(null)" />
+}
+
+<!-- Infinite scroll Sentinel -->
+<div #sentinel style="height: 50px; width: 100%; display: flex; align-items: center; justify-content: center;"></div>
