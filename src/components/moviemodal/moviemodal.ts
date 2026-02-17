@@ -19,6 +19,8 @@ export class MovieModal {
   @Input({ required: true }) movieBudget!: number;
   @Input({ required: true }) movieRevenue!: number;
   @Input({ required: true }) movieProductionHouses!: { id: number; name: string }[];
+  @Input({ required: true }) imdbId!: string;
+  @Input({ required: true }) movieId!: number;
 
   @Output() close = new EventEmitter<void>();
 }

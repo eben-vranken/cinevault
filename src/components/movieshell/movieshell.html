@@ -1,13 +1,7 @@
 <movielist [movies]="movies()" (movieClicked)="openModal($event)" />
 
 @if (selectedMovie()) {
-<moviemodal [movieName]="selectedMovie().title" [movieDescription]="selectedMovie().overview"
-    [moviePosterURL]="selectedMovie().backdrop_path" [movieRating]="selectedMovie().vote_average"
-    [movieGenres]="selectedMovie().genres" [movieReleaseDate]="selectedMovie().release_date"
-    [movieRuntime]="selectedMovie().runtime" [movieLanguage]="selectedMovie().original_language"
-    [movieBudget]="selectedMovie().budget" [movieTagline]="selectedMovie().tagline"
-    [movieRevenue]="selectedMovie().revenue" [movieProductionHouses]="selectedMovie().production_companies"
-    (close)="selectedMovie.set(null)" />
+<moviemodal [movieName]="selectedMovie().title" [movieDescription]="selectedMovie().overview" [moviePosterURL]="selectedMovie().backdrop_path" [movieRating]="selectedMovie().vote_average" [movieGenres]="selectedMovie().genres" [movieReleaseDate]="selectedMovie().release_date" [movieRuntime]="selectedMovie().runtime" [movieLanguage]="selectedMovie().original_language" [movieBudget]="selectedMovie().budget" [movieTagline]="selectedMovie().tagline" [movieRevenue]="selectedMovie().revenue" [movieProductionHouses]="selectedMovie().production_companies" [imdbId]="selectedMovie().imdb_id" [movieId]="selectedMovie().id" (close)="selectedMovie.set(null)" />
 }
 
 <!-- Infinite scroll Sentinel -->

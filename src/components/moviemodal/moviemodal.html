@@ -1,13 +1,10 @@
 <section class="fixed inset-0 z-20 flex items-center justify-center">
     <div class="absolute inset-0 bg-black/55 backdrop-blur-sm cursor-pointer" (click)="close.emit()"></div>
 
-    <section
-        class="relative z-10 bg-black rounded-lg lg:w-2/4 w-11/12 drop-shadow-lg overflow-hidden max-h-[90vh] overflow-y-auto flex flex-col">
-        <button (click)="close.emit()"
-            class="absolute cursor-pointer top-4 right-4 z-20 text-white hover:text-gray-300 transition text-2xl leading-none">✕</button>
+    <section class="relative z-10 bg-black rounded-lg lg:w-2/4 w-11/12 drop-shadow-lg overflow-hidden max-h-[90vh] overflow-y-auto flex flex-col">
+        <button (click)="close.emit()" class="absolute cursor-pointer top-4 right-4 z-20 text-white hover:text-gray-300 transition text-2xl leading-none">✕</button>
         <section class="relative">
-            <img src="https://image.tmdb.org/t/p/w1280/{{ moviePosterURL }}" alt="Movie Poster"
-                class="w-full rounded-md mb-4" />
+            <img src="https://image.tmdb.org/t/p/w1280/{{ moviePosterURL }}" alt="Movie Poster" class="w-full rounded-md mb-4" />
             <div class="absolute bottom-0 left-0 right-0 h-128 bg-linear-to-b from-transparent to-black rounded-md">
             </div>
         </section>
@@ -47,11 +44,10 @@
                 }
             </section>
 
-            <hr
-                class="h-px border-t-0 my-2 bg-transparent bg-linear-to-r from-transparent via-white/25 to-transparent opacity-100" />
+            <hr class="h-px border-t-0 my-2 bg-transparent bg-linear-to-r from-transparent via-white/25 to-transparent opacity-100" />
 
             <!-- Boring Specs -->
-            <section class="flex justify-between px-3 md:flex-row flex-col">
+            <section class="flex justify-between md:flex-row flex-col">
                 <!-- First column -->
                 <ul>
                     <li class="flex gap-x-1">
@@ -81,6 +77,18 @@
                 </ul>
 
                 <span></span>
+            </section>
+
+            <hr class="h-px border-t-0 my-2 bg-transparent bg-linear-to-r from-transparent via-white/25 to-transparent opacity-100" />
+
+            <section class="flex gap-x-4 items-center">
+                <a href="https://www.imdb.com/title/{{imdbId}}/" target="_blank">
+                    <img src="/imdb-icon.png" alt="IMDB" class="h-8 hover:opacity-80 transition" />
+                </a>
+
+                <a href="https://letterboxd.com/tmdb/{{movieId}}/" target="_blank">
+                    <img src="/letterboxd-icon.png" alt="Letterboxd" class="h-8 hover:opacity-80 transition" />
+                </a>
             </section>
         </section>
     </section>
