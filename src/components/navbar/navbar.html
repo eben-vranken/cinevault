@@ -1,10 +1,24 @@
-<nav class="flex items-center justify-between h-16">
-    <a routerLink="/" class="font-bold text-xl">Cinevault</a>
+<nav class="flex items-center justify-between h-16 px-4">
+    <a routerLink="/" class="font-bold text-xl" (click)="closeMenu()">Cinevault</a>
 
-    <ul class="flex gap-4">
-        <a routerLink="/popular" routerLinkActive="font-bold">Popular</a>
-        <a routerLink="/now-playing" routerLinkActive="font-bold">Now Playing</a>
-        <a routerLink="/top-rated" routerLinkActive="font-bold">Top Rated</a>
-        <a routerLink="/upcoming" routerLinkActive="font-bold">Upcoming</a>
+    <!-- Hamburger Button (Mobile) -->
+    <button (click)="toggleMenu()" class="md:hidden flex flex-col gap-1.5 cursor-pointer"
+        [attr.aria-label]="'Toggle menu'">
+        <span class="block w-6 h-0.5 bg-white transition-all" [class.rotate-45]="isMenuOpen"
+            [class.translate-y-2]="isMenuOpen"></span>
+        <span class="block w-6 h-0.5 bg-white transition-all" [class.opacity-0]="isMenuOpen"></span>
+        <span class="block w-6 h-0.5 bg-white transition-all" [class.-rotate-45]="isMenuOpen"
+            [class.-translate-y-2]="isMenuOpen"></span>
+    </button>
+
+    <!-- Navigation Menu -->
+    <ul class="flex gap-4 md:flex hidden absolute md:static top-16 left-0 right-0 flex-col md:flex-row bg-black md:bg-transparent p-4 md:p-0 z-20"
+        [class.flex]="isMenuOpen" [class.hidden]="!isMenuOpen">
+        <li><a routerLink="/popular" routerLinkActive="font-bold" (click)="closeMenu()" class="block">Popular</a></li>
+        <li><a routerLink="/now-playing" routerLinkActive="font-bold" (click)="closeMenu()" class="block">Now
+                Playing</a></li>
+        <li><a routerLink="/top-rated" routerLinkActive="font-bold" (click)="closeMenu()" class="block">Top Rated</a>
+        </li>
+        <li><a routerLink="/upcoming" routerLinkActive="font-bold" (click)="closeMenu()" class="block">Upcoming</a></li>
     </ul>
 </nav>
