@@ -93,6 +93,12 @@ export class MovieShell {
       case 'upcoming':
         request$ = this.movieService.getUpcoming(this.currentPage);
         break;
+      case 'genre':
+        const genreId = this.route.snapshot.paramMap.get('genreId');
+        request$ = genreId
+          ? this.movieService.getMoviesByGenre(Number(genreId), this.currentPage)
+          : this.movieService.getPopularMovies(this.currentPage);
+        break;
       default:
         request$ = this.movieService.getPopularMovies(this.currentPage);
     }

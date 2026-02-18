@@ -17,4 +17,11 @@ export class Navbar {
   closeMenu() {
     this.isMenuOpen = false;
   }
+
+  onGenreChange(event: Event) {
+    const value = (event.target as HTMLSelectElement).value;
+    if (value) {
+      window.location.href = '/genre/' + value;
+    }
+  }
 }

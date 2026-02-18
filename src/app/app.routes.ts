@@ -8,4 +8,5 @@ export const routes: Routes = [
   { path: 'now-playing', component: MovieShell, data: { type: 'now-playing' } },
   { path: 'top-rated', component: MovieShell, data: { type: 'top-rated' } },
   { path: 'upcoming', component: MovieShell, data: { type: 'upcoming' } },
+  { path: 'genre/:genreId', component: MovieShell, data: { type: 'genre' } },
 ];

@@ -53,4 +53,16 @@ export class MovieService {
       },
     });
   }
+
+  // Search movies by genre
+  public getMoviesByGenre(genreId: number, page: number = 1): Observable<any> {
+    return this.http.get(
+      `https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&page=${page}`,
+      {
+        headers: {
+          Authorization: environment.tmdbToken,
+        },
+      },
+    );
+  }
 }
